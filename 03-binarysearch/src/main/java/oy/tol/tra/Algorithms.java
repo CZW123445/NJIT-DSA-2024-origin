@@ -2,7 +2,7 @@ package oy.tol.tra;
 
 public class Algorithms {
     // 冒泡排序
-    public static <T extends Comparable<T>> void sort(T [] array) {
+    public static <T extends Comparable<T>> void sort(T[] array) {
         boolean swapped = false;
         for (int i = 0; i < array.length - 1; i++) {
             for (int j = 0; j < array.length - i - 1; j++) {
@@ -20,7 +20,7 @@ public class Algorithms {
     }
 
     // 选择排序
-    public static <T> void reverse(T [] array)  {
+    public static <T> void reverse(T[] array) {
         int start = 0;
         int end = array.length - 1;
         while (start < end) {
@@ -33,7 +33,7 @@ public class Algorithms {
     }
 
     // 插入排序
-    public static <T extends Comparable<T>> int binarySearch(T aValue, T [] fromArray, int fromIndex, int toIndex)  {
+    public static <T extends Comparable<T>> int binarySearch(T aValue, T[] fromArray, int fromIndex, int toIndex) {
         while (fromIndex <= toIndex) {
             int mid = fromIndex + (toIndex - fromIndex) / 2;
             int cmp = fromArray[mid].compareTo(aValue);
@@ -49,11 +49,11 @@ public class Algorithms {
     }
 
     // 快速排序
-    public static <E extends Comparable<E>> void fastSort(E [] array, int start, int end) {
-        quickSort(array, start, end);
+    public static <E extends Comparable<E>> void fastSort(E[] array) {
+        quickSort(array, 0, array.length - 1);
     }
 
-    private static <E extends Comparable<E>> void quickSort(E [] array, int start, int end) {
+    private static <E extends Comparable<E>> void quickSort(E[] array, int start, int end) {
         if (start < end) {
             int partitionIndex = partition(array, start, end);
             quickSort(array, start, partitionIndex - 1);
@@ -61,7 +61,7 @@ public class Algorithms {
         }
     }
 
-    private static <E extends Comparable<E>> int partition(E [] array, int begin, int end) {
+    private static <E extends Comparable<E>> int partition(E[] array, int begin, int end) {
         E pivot = array[end];
         int i = begin - 1;
 

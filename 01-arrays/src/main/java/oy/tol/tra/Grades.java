@@ -5,7 +5,7 @@ package oy.tol.tra;
  * misbehaving algorithm for reversing the array.
  */
 public class Grades {
-   
+
    private Integer [] grades = null;
 
    /**
@@ -23,15 +23,30 @@ public class Grades {
     * The method to reverse the internal Java int array.
     */
    public void reverse() {
-      Algorithms.reverse(grades);
+      /* TODO:
+       1. Edit the test data files to see if the reverse() really works or not.
+       2. Execute the IntArrayTests to see that some of them fail.
+       3. Study the code below and try to find what is the issue.
+       4. Use the debugger to see the execution and variable values if necessary.
+       5. Fix the issue.
+       6. Transform the algorithm to <strong>use</strong> the generic one from Algorithms.java, as instructed in the readme file.
+      */
+      Algorithms.reverse(this.grades);
    }
 
    /**
     * Sorts the array to ascending order.
     */
    public void sort() {
-      Algorithms.sort(grades);
-      
+      /* TODO:
+       1. Edit the test data files to see if the sort() really works or not.
+       2. Execute the IntArrayTests to see that some of them fail.
+       3. Study the code below and try to find what is the issue.
+       4. Use the debugger to see the execution and variable values if necessary.
+       5. Fix the issue.
+       6. Transform the algorithm to <strong>use</strong> the generic one from Algorithms.java as instructed in the readme file.
+      */
+      Algorithms.sort(this.grades);
    }
 
    /**
@@ -42,4 +57,3 @@ public class Grades {
       return grades;
    }
 }
-
