@@ -46,6 +46,7 @@ public class Grades {
        5. Fix the issue.
        6. Transform the algorithm to <strong>use</strong> the generic one from Algorithms.java as instructed in the readme file.
       */
+      
       Algorithms.sort(this.grades);
    }
 
