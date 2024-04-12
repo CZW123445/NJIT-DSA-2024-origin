@@ -1,53 +1,55 @@
 package oy.tol.tra;
 
-import java.util.HashMap;
+import java.util.EmptyStackException;
 
 public class ParenthesisChecker {
 
-   private ParenthesisChecker() {
-   }
+    private ParenthesisChecker() {
+    }
 
-   /**
-    * Implement this function which checks if the given string has matching opening and closing
-    * parentheses.
-    *
-    * @param stack The stack object used in checking the parentheses from the string.
-    * @param fromString A string containing parentheses to check if it is valid.
-    * @return Returns the number of parentheses found from the input in total (both opening and closing).
-    * @throws ParenthesesException if the parentheses did not match as intended.
-    */
-    public static int checkParentheses(StackInterface<Character> stack, String fromString) throws ParenthesesException {
-        HashMap<Character, Character> matchingParentheses = new HashMap<>();
-        matchingParentheses.put(')', '(');
-        matchingParentheses.put('}', '{');
-        matchingParentheses.put(']', '[');
-
-        int parenthesesCount = 0;
-
-        for (char c : fromString.toCharArray()) {
-            if (c == '(' || c == '{' || c == '[') {
-                try {
-                    stack.push(c);
-                    parenthesesCount++;
-                } catch (StackAllocationException e) {
-                    throw new ParenthesesException("Error while pushing into stack.", ParenthesesException.ErrorCode.STACK_ALLOCATION_ERROR);
-                }
-            } else if (c == ')' || c == '}' || c == ']') {
-                if (stack.isEmpty()) {
-                    throw new ParenthesesException("Too many closing parentheses in the string.", ParenthesesException.ErrorCode.TOO_MANY_CLOSING_PARENS);
-                }
-                Character top = stack.pop();
-                parenthesesCount++;
-                if (top == null || top != matchingParentheses.get(c)) {
-                    throw new ParenthesesException("Wrong kind of parenthesis in the text.", ParenthesesException.ErrorCode.WRONG_KIND_OF_PARENTHESIS);
+        public static int checkParentheses(StackInterface<Character> stack, String fromString) throws ParenthesesException {
+        
+        int number = 0;
+        
+        for (int i=0;i<fromString.length();i++) {
+                        char ch = fromString.charAt(i);
+            if (ch == '(' || ch == '[' || ch == '{'){
+                               try {
+                    stack.push(ch);
+                    number++;
+                } catch (Exception e) {
+                    throw new ParenthesesException("Failed to push", ParenthesesException.STACK_FAILURE);
                 }
             }
-        }
+            
+            else if (ch == ')' || ch == ']' || ch == '}'){
+                
+                if (stack.isEmpty()){
+                    throw new ParenthesesException("There are too many closing parenthesis",ParenthesesException.TOO_MANY_CLOSING_PARENTHESES);
+                }
+                
+                else if (findMatch(stack.peek()) != ch){
+                    System.out.println(stack.peek());
+                    throw new ParenthesesException("Wrong kind of parenthesis were in the text",ParenthesesException.PARENTHESES_IN_WRONG_ORDER);
+                }else {
+                    stack.pop();
+                    number++;
+                }
+            }
 
-        if (!stack.isEmpty()) {
-            throw new ParenthesesException("Too few closing parentheses in the string.", ParenthesesException.ErrorCode.TOO_FEW_CLOSING_PARENS);
         }
+        
+        if (!stack.isEmpty()){
+            throw new ParenthesesException("The string has more opening than closing parentheses.",ParenthesesException.TOO_FEW_CLOSING_PARENTHESES);
+        }
+        return number;
+    }
 
-        return parenthesesCount;
+    private static char findMatch(char parentheses){
+        if (parentheses == '('){
+            return ')';
+        }else if (parentheses == '['){
+            return ']';
+        }else return '}';
     }
 }
